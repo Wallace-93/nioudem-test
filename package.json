@@ -9,13 +9,15 @@
     "start": "next start"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.49.4",
     "next": "14.2.29",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "@supabase/supabase-js": "^2.49.4"
   },
   "devDependencies": {
-    "@types/node": "25.9.1",
-    "@types/react": "19.2.15"
+    "typescript": "^5.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@types/node": "^18.0.0"
   }
 }
