@@ -1,15 +1,20 @@
 "use client"
-export const dynamic = "force-dynamic"
+
 import Link from "next/link"
+import { useEffect, useState } from "react"
+import { createClient } from "@/lib/supabase-client"
 
 export default function Home() {
+  const [user, setUser] = useState<any>(null)
+  const supabase = createClient()
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setUser(data?.user ?? null))
+  }, [])
+
+  const startHref = user ? "/dashboard" : "/inscription"
+  const startLabel = user ? "Mon espace →" : "Commencer"
   return (
-<<<<<<< Updated upstream
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", gap: 16 }}>
-      <h1>NiouDem Drive</h1>
-      <Link href="/connexion" style={{ color: "#00F5A0" }}>Se connecter</Link>
-      <Link href="/inscription" style={{ color: "#00F5A0" }}>S'inscrire</Link>
-=======
     <div className="font-sans text-foreground overflow-x-hidden">
       {/* NAV */}
       <nav className="fixed top-0 w-full z-50 px-4 md:px-8 py-3 flex items-center justify-between bg-background/85 backdrop-blur-md border-b border-border">
@@ -278,7 +283,6 @@ export default function Home() {
           Fait avec amour pour les moniteurs independants
         </p>
       </footer>
->>>>>>> Stashed changes
     </div>
   )
 }

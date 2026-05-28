@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="fr">
-      <body style={{ margin: 0, fontFamily: 'sans-serif', background: '#0A0F1E', color: 'white', minHeight: '100vh' }}>
-=======
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { MobileNav } from '@/components/mobile-nav'
@@ -40,8 +34,8 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body className="antialiased pb-safe">
->>>>>>> Stashed changes
         {children}
+        <MobileNav />
       </body>
     </html>
   )

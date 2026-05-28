@@ -1,22 +1,14 @@
 "use client"
+
 export const dynamic = "force-dynamic"
+
 import { useState } from "react"
-import { createClient } from "@supabase/supabase-js"
 import Link from "next/link"
+import { createClient } from "@/lib/supabase-client"
 
 export default function Connexion() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-<<<<<<< Updated upstream
-  const [status, setStatus] = useState("")
-
-  async function login() {
-    setStatus("Connexion...")
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-    )
-=======
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -24,17 +16,9 @@ export default function Connexion() {
     setLoading(true)
     setError(null)
     const supabase = createClient()
->>>>>>> Stashed changes
     const { data, error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (error) {
-<<<<<<< Updated upstream
-      setStatus("Erreur : " + error.message)
-    } else if (data.session) {
-      setStatus("✅ Connecté ! Redirection...")
-      await new Promise(r => setTimeout(r, 500))
-      window.location.replace("/dashboard")
-=======
       setError("Email ou mot de passe incorrect.")
       setLoading(false)
       return
@@ -46,26 +30,10 @@ export default function Connexion() {
     } else {
       setError("Connexion échouée. Réessayez.")
       setLoading(false)
->>>>>>> Stashed changes
     }
   }
 
   return (
-<<<<<<< Updated upstream
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", gap: 16 }}>
-      <h1>Connexion</h1>
-      <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}
-        style={{ padding: 12, borderRadius: 8, border: "1px solid #333", background: "#1a1f2e", color: "white", width: 300 }} />
-      <input type="password" placeholder="Mot de passe" value={password} onChange={e => setPassword(e.target.value)}
-        style={{ padding: 12, borderRadius: 8, border: "1px solid #333", background: "#1a1f2e", color: "white", width: 300 }}
-        onKeyDown={e => e.key === 'Enter' && login()} />
-      <button onClick={login}
-        style={{ padding: "12px 32px", borderRadius: 8, background: "#00F5A0", color: "#0A0F1E", fontWeight: "bold", border: "none", cursor: "pointer" }}>
-        Se connecter
-      </button>
-      {status && <p style={{ color: status.includes("Erreur") ? "#ff6b6b" : "#00F5A0" }}>{status}</p>}
-      <Link href="/inscription" style={{ color: "#666" }}>Pas de compte ? S'inscrire</Link>
-=======
     <div className="font-sans text-foreground min-h-screen flex flex-col">
       <nav className="fixed top-0 w-full z-50 px-4 md:px-8 py-3 flex items-center justify-between bg-background/85 backdrop-blur-md border-b border-border">
         <Link href="/" className="flex flex-col">
@@ -128,7 +96,6 @@ export default function Connexion() {
           </div>
         </div>
       </div>
->>>>>>> Stashed changes
     </div>
   )
 }
