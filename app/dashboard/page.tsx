@@ -7,6 +7,7 @@ export default function Dashboard() {
   const [info, setInfo] = useState("Chargement...")
 
   useEffect(() => {
+<<<<<<< Updated upstream
     async function load() {
       const supabase = createClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL || '',
@@ -26,6 +27,26 @@ export default function Dashboard() {
         setInfo(`Bonjour ${profile.prenom} ${profile.nom} — Rôle : ${profile.role}`)
       } else {
         setInfo("Profil introuvable")
+=======
+    async function redirect() {
+      try {
+        const { data: { session } } = await supabase.auth.getSession()
+        if (!session) { router.push("/connexion"); return }
+
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", session.user.id)
+          .single()
+
+        if (profile?.role === "moniteur") {
+          router.push("/dashboard/moniteur")
+        } else {
+          router.push("/dashboard/eleve")
+        }
+      } catch (e) {
+        router.push("/connexion")
+>>>>>>> Stashed changes
       }
     }
     load()
